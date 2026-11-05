@@ -18,7 +18,7 @@ export default function AdminShell({ children }: { children: ReactNode }) {
 
   return (
     <ToastCtx.Provider value={toast.push}>
-      <div dir="rtl" className="min-h-screen bg-band lg:flex">
+      <div dir="rtl" className="min-h-screen min-h-[100dvh] bg-band lg:flex">
         <aside className="bg-secondary text-white lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:shrink-0">
           <div className="flex items-center justify-between gap-3 p-4 lg:flex-col lg:items-stretch lg:gap-8 lg:p-6">
             <div className="flex items-center gap-2"><Mark /><span className="font-black">لوحة التحكم</span></div>

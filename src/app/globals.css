@@ -6,8 +6,9 @@
 .dark{--bg:#0a1827;--card:#0f2438;--heading:#fff;--title:#f1f5f9;--sub:#9db0c4;--mint:#0c2030;--band:#081420;--line:rgba(255,255,255,.08);--field:#0b1d2f;--fieldline:#23405a}
 
 @layer base {
-  html{scroll-behavior:smooth;scroll-padding-top:72px}
-  body{@apply bg-page font-sans text-title antialiased}
+  html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{@apply bg-page font-sans text-title antialiased;overflow-x:clip}
+  img,svg,video{max-width:100%}
   :focus-visible{@apply outline-2 outline-offset-2 outline-primary}
 }
 @layer components {
@@ -16,6 +17,6 @@
   .badge{@apply inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/15 px-4 py-2 text-base font-bold leading-5 text-primary}
   .badge::before{content:"";@apply h-2 w-2 rounded-full bg-primary}
   .h2{@apply text-[30px] font-black leading-[42px] text-title md:text-[44px] md:leading-[55px]}
-  .input{@apply w-full rounded-[10px] border border-fieldline bg-field px-[14px] py-3 text-[15px] text-title placeholder:text-black/50 dark:placeholder:text-white/40 focus:border-primary focus:outline-none}
+  .input{@apply w-full rounded-[10px] border border-fieldline bg-field px-[14px] py-3 text-base text-title md:text-[15px] placeholder:text-black/50 dark:placeholder:text-white/40 focus:border-primary focus:outline-none}
 }
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}

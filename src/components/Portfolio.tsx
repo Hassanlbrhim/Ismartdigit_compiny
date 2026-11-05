@@ -60,10 +60,10 @@ export default function Portfolio() {
 
       <AnimatePresence>
         {sel && (
-          <motion.div className="fixed inset-0 z-[60] grid place-items-center bg-black/60 p-4 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSel(null)}>
+          <motion.div className="fixed inset-0 z-[60] grid place-items-center bg-black/60 p-3 sm:p-4 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSel(null)}>
             <motion.div role="dialog" aria-modal="true" aria-label={tx(sel.title)} onClick={e => e.stopPropagation()}
               initial={{ y: 24, scale: 0.97 }} animate={{ y: 0, scale: 1 }} exit={{ y: 24, scale: 0.97 }}
-              className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[20px] bg-card shadow-2xl">
+              className="relative max-h-[92vh] max-h-[92dvh] w-full max-w-3xl overflow-y-auto rounded-[20px] bg-card shadow-2xl">
               <button autoFocus onClick={() => setSel(null)} aria-label={ui.close} className="absolute end-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-white text-secondary shadow"><X size={18} /></button>
               <Cover p={sel} className="h-[240px] md:h-[340px]" />
               <div className="flex flex-col gap-4 p-6 md:p-8">

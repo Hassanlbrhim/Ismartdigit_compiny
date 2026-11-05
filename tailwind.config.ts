@@ -4,6 +4,7 @@ import type { Config } from "tailwindcss";
 // Primary #2eb98c · Secondary #122d46 · Title #1f2937 · Sub Title #6b7280 · Gray #4b5563
 const config: Config = {
   darkMode: "class",
+  future: { hoverOnlyWhenSupported: true },
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
