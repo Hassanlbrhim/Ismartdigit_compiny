@@ -7,7 +7,7 @@ export default function Reveal({ children, i = 0, className }: { children: React
   const calm = useReducedMotion();
   return (
     <motion.div className={className} initial={calm ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, delay: Math.min(i, 6) * 0.06, ease: "easeOut" }}>
+      viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5, delay: Math.min(i, 6) * 0.06, ease: "easeOut" }}>
       {children}
     </motion.div>
   );

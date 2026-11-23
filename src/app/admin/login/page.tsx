@@ -16,7 +16,7 @@ export default function Login() {
     setErr(r.status === 429 ? "محاولات كثيرة. حاول بعد 10 دقائق." : "البريد الإلكتروني أو كلمة المرور غير صحيحة."); setBusy(false);
   }
   return (
-    <main className="grid min-h-screen place-items-center bg-secondary px-5">
+    <main className="grid min-h-dvh place-items-center bg-secondary px-5">
       <form onSubmit={submit} className="w-full max-w-sm space-y-5 rounded-[20px] bg-card p-8 shadow-2xl">
         <div className="flex flex-col items-center gap-3 text-center"><Mark size={44} /><h1 className="text-2xl font-black text-title">تسجيل دخول المشرف</h1></div>
         <Field label="البريد الإلكتروني"><Input name="email" type="email" required autoComplete="username" dir="ltr" /></Field>

@@ -11,7 +11,7 @@ export const useToast = () => useContext(ToastCtx);
 
 export function Btn({ variant = "primary", className = "", ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "ghost" | "danger" }) {
   const v = { primary: "bg-primary text-white hover:brightness-95", ghost: "border border-fieldline text-title hover:border-primary hover:text-primary", danger: "bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-500/10" }[variant];
-  return <button {...p} className={`inline-flex h-10 items-center justify-center gap-2 rounded-[10px] px-4 text-sm font-bold transition disabled:opacity-50 ${v} ${className}`} />;
+  return <button {...p} className={`inline-flex h-11 items-center justify-center gap-2 rounded-[10px] px-4 text-sm font-bold transition active:scale-[0.97] disabled:opacity-50 ${v} ${className}`} />;
 }
 export function Field({ label, hint, children }: { label: string; hint?: string; children: ReactNode }) {
   return <label className="flex flex-col gap-1.5"><span className="text-sm font-semibold text-title">{label}</span>{children}{hint && <span className="text-xs text-sub">{hint}</span>}</label>;
@@ -35,7 +35,7 @@ export function Bi({ label, value, onChange, area, hint }: { label: string; valu
 }
 export function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) {
   return (
-    <button type="button" role="switch" aria-checked={checked} aria-label={label} onClick={() => onChange(!checked)} className={`relative h-6 w-11 shrink-0 rounded-full transition ${checked ? "bg-primary" : "bg-slate-300 dark:bg-slate-600"}`}>
+    <button type="button" role="switch" aria-checked={checked} aria-label={label} onClick={() => onChange(!checked)} className={`relative h-6 w-11 shrink-0 rounded-full transition after:absolute after:-inset-2.5 after:content-[''] ${checked ? "bg-primary" : "bg-slate-300 dark:bg-slate-600"}`}>
       <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${checked ? "end-0.5" : "start-0.5"}`} />
     </button>
   );
@@ -43,9 +43,9 @@ export function Toggle({ checked, onChange, label }: { checked: boolean; onChang
 export function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
   useEffect(() => { const k = (e: KeyboardEvent) => e.key === "Escape" && onClose(); addEventListener("keydown", k); return () => removeEventListener("keydown", k); }, [onClose]);
   return (
-    <div className="fixed inset-0 z-[70] grid place-items-center bg-black/50 p-4" onMouseDown={onClose}>
-      <div role="dialog" aria-modal="true" onMouseDown={e => e.stopPropagation()} className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-6 shadow-2xl">
-        <div className="mb-5 flex items-center justify-between"><h2 className="text-xl font-black text-title">{title}</h2><button onClick={onClose} aria-label="إغلاق" className="grid h-9 w-9 place-items-center rounded-lg hover:bg-line"><X size={18} /></button></div>
+    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-black/50 sm:items-center sm:p-4" onMouseDown={onClose}>
+      <div role="dialog" aria-modal="true" onMouseDown={e => e.stopPropagation()} className="max-h-[92dvh] w-full max-w-2xl animate-sheet-up overflow-y-auto overscroll-contain rounded-t-3xl bg-card p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl sm:rounded-2xl sm:p-6">
+        <div className="mb-5 flex items-center justify-between"><h2 className="text-xl font-black text-title">{title}</h2><button onClick={onClose} aria-label="إغلاق" className="grid h-11 w-11 place-items-center rounded-lg hover:bg-line"><X size={18} /></button></div>
         {children}
       </div>
     </div>
@@ -58,7 +58,7 @@ export function ImageInput({ value, onChange }: { value: string; onChange: (v: s
       <div className="flex items-center gap-3">
         <div className="h-20 w-32 shrink-0 overflow-hidden rounded-lg bg-[#a3a3a3]">{value && <img src={value} alt="" className="h-full w-full object-cover" />}</div>
         <div className="flex flex-col gap-2">
-          <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-[10px] border border-fieldline px-4 text-sm font-bold text-title hover:border-primary">
+          <label className="inline-flex h-11 cursor-pointer items-center gap-2 rounded-[10px] border border-fieldline px-4 text-sm font-bold text-title hover:border-primary">
             <ImagePlus size={16} />رفع صورة
             <input type="file" accept="image/*" hidden onChange={async e => { const f = e.target.files?.[0]; if (!f) return; try {
               const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ dataUrl: await fileToDataUrl(f, 1000) }) });

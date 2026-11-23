@@ -67,7 +67,7 @@ export default function ContentEditor() {
         <div className="grid gap-4 md:grid-cols-2">{d.footer.socials.map((s, i) => <Field key={s.id} label={s.icon} hint="اتركه فارغاً لإخفاء الأيقونة"><Input dir="ltr" value={s.url === "#" ? "" : s.url} placeholder="https://" onChange={e => set(["footer", "socials", i, "url"], e.target.value)} /></Field>)}</div>
       </Sec>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-card/90 p-3 backdrop-blur lg:ps-64"><div className="mx-auto flex max-w-5xl justify-end"><Btn onClick={save} disabled={busy}><Save size={16} />{busy ? "جارٍ الحفظ…" : "حفظ ونشر"}</Btn></div></div>
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-card/90 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur lg:ps-64"><div className="mx-auto flex max-w-5xl justify-end"><Btn onClick={save} disabled={busy}><Save size={16} />{busy ? "جارٍ الحفظ…" : "حفظ ونشر"}</Btn></div></div>
     </div>
   );
 }

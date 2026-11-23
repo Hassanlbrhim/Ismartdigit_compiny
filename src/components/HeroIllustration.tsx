@@ -28,7 +28,7 @@ function Float({ l, t, w, h, i = 0, amp = 6, dur = 6, calm, style, children }: {
 export default function HeroIllustration() {
   const calm = !!useReducedMotion();
   const wrap = useRef<HTMLDivElement>(null);
-  const [s, setS] = useState(1);
+  const [s, setS] = useState<number | null>(null);
   useIso(() => {
     const el = wrap.current; if (!el) return;
     const f = () => setS(Math.min(1, el.clientWidth / W));
@@ -44,8 +44,8 @@ export default function HeroIllustration() {
 
   const gridCols = [0, 16, 32, 48];
   return (
-    <div ref={wrap} dir="ltr" aria-hidden className="mx-auto w-full max-w-[480px]" style={{ height: H * s }}>
-      <div style={{ position: "relative", width: W, height: H, transform: `scale(${s})`, transformOrigin: "top left", fontFamily: "var(--font-inter), Inter, system-ui, sans-serif" }}>
+    <div ref={wrap} dir="ltr" aria-hidden className="relative mx-auto aspect-[480/520] w-full max-w-[480px] overflow-hidden">
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, transform: `scale(${s ?? 1})`, transformOrigin: "top left", visibility: s === null ? "hidden" : "visible", fontFamily: "var(--font-inter), Inter, system-ui, sans-serif" }}>
         {/* soft backdrop blob */}
         <div style={{ ...box(30, 75, 420, 380), borderRadius: "50%", background: "rgba(46,185,140,.07)" }} />
         {/* dot grids: top-right and bottom-left, 3.6px dots on a 16px pitch */}

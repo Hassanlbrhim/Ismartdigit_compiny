@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { CheckCircle2, FileText, Mail, Send, User } from "lucide-react";
 import { useApp, useContent } from "./Providers";
 
@@ -39,7 +40,7 @@ export default function Contact() {
   const Err = ({ id, m }: { id: string; m?: string }) => m ? <p id={id} role="alert" className="text-sm text-red-500">{m}</p> : null;
 
   return (
-    <section id="contact" className="bg-mint py-[60px]">
+    <section id="contact" className="bg-mint py-12 sm:py-[60px]">
       <div className="mx-auto w-full max-w-[671px] px-5">
         <div className="h-1 rounded-2xl bg-gradient-to-r from-[#14b8a6] via-[#6ee7b7] to-[#14b8a6]" />
         <div className="rounded-b-[28px] bg-card p-6 shadow-svc sm:p-12">
@@ -49,12 +50,12 @@ export default function Contact() {
           </div>
 
           {state === "ok" ? (
-            <div className="flex flex-col items-center gap-3 py-8 text-center" role="status">
+            <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 20, stiffness: 260 }} className="flex flex-col items-center gap-3 py-8 text-center" role="status">
               <CheckCircle2 size={48} className="text-primary" />
               <h3 className="text-2xl font-black text-title">{f.okTitle}</h3>
               <p className="text-sub">{f.okBody}</p>
               <button onClick={() => setState("idle")} className="mt-2 font-bold text-primary">{f.again}</button>
-            </div>
+            </motion.div>
           ) : (
             <form onSubmit={submit} noValidate className="flex flex-col gap-7">
               <div className="flex flex-col gap-6">
@@ -77,7 +78,7 @@ export default function Contact() {
                 <input tabIndex={-1} autoComplete="off" aria-hidden className="hidden" name="website" value={v.website} onChange={e => set("website", e.target.value)} />
               </div>
               {state === "fail" && <p role="alert" className="text-center text-sm text-red-500">{f.errServer}</p>}
-              <button disabled={state === "sending"} className="flex items-center justify-center gap-[10px] rounded-2xl bg-[linear-gradient(175deg,#2eb98c_0%,#0d9488_100%)] py-4 text-base font-black leading-6 text-white shadow-send transition hover:brightness-95 disabled:opacity-60">
+              <button disabled={state === "sending"} className="flex min-h-[52px] items-center justify-center gap-[10px] rounded-2xl bg-[linear-gradient(175deg,#2eb98c_0%,#0d9488_100%)] py-4 text-base font-black leading-6 text-white shadow-send transition active:scale-[0.98] hover:brightness-95 disabled:opacity-60">
                 <Send size={17} className="rtl:-scale-x-100" />{state === "sending" ? f.sending : f.send}
               </button>
             </form>

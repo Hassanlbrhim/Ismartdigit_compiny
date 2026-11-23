@@ -49,10 +49,10 @@ export default function Services() {
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px]" style={{ color: s.color, background: s.color + "1a" }}><I size={20} /></span>
             <div className="min-w-[160px] flex-1"><p className="font-bold">{s.title.ar}</p><p className="text-sm text-sub" dir="ltr">{s.title.en}</p></div>
             <div className="flex items-center gap-2 text-sm"><Toggle checked={s.active} onChange={v => commit(list.map(x => x.id === s.id ? { ...x, active: v } : x), v ? "تم التفعيل" : "تم الإخفاء")} label="تفعيل" />{s.active ? "مفعّلة" : "مخفية"}</div>
-            <div className="flex gap-1">
+            <div className="flex w-full gap-1 sm:w-auto">
               <Btn variant="ghost" className="!px-2.5" aria-label="أعلى" disabled={i === 0} onClick={() => move(i, -1)}><ArrowUp size={16} /></Btn>
               <Btn variant="ghost" className="!px-2.5" aria-label="أسفل" disabled={i === list.length - 1} onClick={() => move(i, 1)}><ArrowDown size={16} /></Btn>
-              <Btn variant="ghost" onClick={() => setEdit(s)}><Pencil size={16} />تعديل</Btn>
+              <Btn variant="ghost" className="flex-1 sm:flex-none" onClick={() => setEdit(s)}><Pencil size={16} />تعديل</Btn>
               <Btn variant="danger" aria-label="حذف" onClick={() => confirm(`حذف «${s.title.ar}»؟`) && commit(list.filter(x => x.id !== s.id), "تم الحذف")}><Trash2 size={16} /></Btn>
             </div>
           </li>); })}</ul>}

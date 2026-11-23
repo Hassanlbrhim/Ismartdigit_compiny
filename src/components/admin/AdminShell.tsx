@@ -20,17 +20,17 @@ export default function AdminShell({ children }: { children: ReactNode }) {
     <ToastCtx.Provider value={toast.push}>
       <div dir="rtl" className="min-h-screen min-h-[100dvh] bg-band lg:flex">
         <aside className="bg-secondary text-white lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:shrink-0">
-          <div className="flex items-center justify-between gap-3 p-4 lg:flex-col lg:items-stretch lg:gap-8 lg:p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 p-4 lg:flex-col lg:flex-nowrap lg:items-stretch lg:gap-8 lg:p-6">
             <div className="flex items-center gap-2"><Mark /><span className="font-black">لوحة التحكم</span></div>
-            <nav className="flex gap-1 overflow-x-auto lg:flex-col" aria-label="Admin">
+            <nav className="order-last flex w-full gap-1 overflow-x-auto pb-1 lg:order-none lg:w-auto lg:flex-col" aria-label="Admin">
               {NAV.map(([href, label, I]) => {
                 const on = href === "/admin" ? path === href : path.startsWith(href);
-                return <Link key={href} href={href} className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition ${on ? "bg-primary text-white" : "text-white/70 hover:bg-white/10"}`}><I size={16} />{label}</Link>;
+                return <Link key={href} href={href} className={`flex min-h-11 items-center gap-2 whitespace-nowrap rounded-lg px-3 text-sm font-semibold transition active:scale-95 ${on ? "bg-primary text-white" : "text-white/70 hover:bg-white/10"}`}><I size={16} />{label}</Link>;
               })}
             </nav>
             <div className="flex gap-1 lg:mt-auto lg:flex-col">
-              <a href="/" target="_blank" className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/70 hover:bg-white/10"><ExternalLink size={16} />عرض الموقع</a>
-              <button onClick={logout} className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/70 hover:bg-white/10"><LogOut size={16} />خروج</button>
+              <a href="/" target="_blank" className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm text-white/70 hover:bg-white/10"><ExternalLink size={16} />عرض الموقع</a>
+              <button onClick={logout} className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm text-white/70 hover:bg-white/10"><LogOut size={16} />خروج</button>
             </div>
           </div>
         </aside>

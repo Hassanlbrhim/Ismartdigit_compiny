@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { Mail, MailOpen, Trash2 } from "lucide-react";
+import { ArrowRight, Mail, MailOpen, Trash2 } from "lucide-react";
 import { Btn, Empty, Input, panel, useToast } from "@/components/admin/ui";
 import type { Inquiry } from "@/lib/types";
 
@@ -23,11 +23,11 @@ export default function Messages() {
     <div className="space-y-6">
       <h1 className="text-3xl font-black">رسائل العملاء</h1>
       <div className="flex flex-wrap gap-3">
-        <Input className="max-w-xs" placeholder="بحث بالاسم أو البريد أو النص…" value={q} onChange={e => setQ(e.target.value)} />
+        <Input className="w-full sm:max-w-xs" placeholder="بحث بالاسم أو البريد أو النص…" value={q} onChange={e => setQ(e.target.value)} />
         <Btn variant={onlyNew ? "primary" : "ghost"} onClick={() => setOnlyNew(!onlyNew)}>غير المقروءة فقط</Btn>
       </div>
       <div className="grid gap-4 lg:grid-cols-[380px_1fr]">
-        <div className={`${panel} !p-0 max-h-[70vh] overflow-y-auto`}>
+        <div className={`${panel} !p-0 max-h-[70dvh] overflow-y-auto overscroll-contain ${cur ? "hidden lg:block" : ""}`}>
           {list === null ? <Empty>جارٍ التحميل…</Empty> : !shown.length ? <Empty>لا توجد رسائل.</Empty> : (
             <ul className="divide-y divide-line">{shown.map(i => (
               <li key={i.id}><button onClick={() => open(i)} className={`w-full p-4 text-start transition hover:bg-line ${sel === i.id ? "bg-primary/10" : ""}`}>
@@ -37,9 +37,10 @@ export default function Messages() {
               </button></li>))}</ul>
           )}
         </div>
-        <div className={panel}>
+        <div className={`${panel} ${!cur ? "hidden lg:block" : ""}`}>
           {!cur ? <Empty>اختر رسالة لعرضها.</Empty> : (
             <div className="space-y-4">
+              <button onClick={() => setSel(null)} className="inline-flex h-11 items-center gap-1 font-bold text-primary lg:hidden"><ArrowRight size={18} />رجوع للرسائل</button>
               <div><h2 className="text-2xl font-black">{cur.name}</h2><a href={`mailto:${cur.email}`} dir="ltr" className="text-primary">{cur.email}</a><p className="text-xs text-sub">{new Date(cur.date).toLocaleString("ar-EG")}</p></div>
               <p className="whitespace-pre-wrap rounded-xl bg-field p-4 leading-8">{cur.details}</p>
               <div className="flex flex-wrap gap-2">

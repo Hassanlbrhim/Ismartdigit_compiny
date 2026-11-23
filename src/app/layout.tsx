@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"; // content comes from the store on every
 
 const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", weight: ["400", "600", "700", "800", "900"] });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", weight: ["400", "700"] }); // used only inside the hero illustration (Figma uses Inter there)
-export const viewport: Viewport = { width: "device-width", initialScale: 1 }; // makes phones render at real width, not a zoomed-out desktop page
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: [{ media: "(prefers-color-scheme: light)", color: "#2eb98c" }, { media: "(prefers-color-scheme: dark)", color: "#0a1827" }] }; // real-width phones, notch-aware, coloured browser bar
 export const metadata: Metadata = { title: "آي سمارت ديجيت | I Smart Digit", description: "حلول رقمية ذكية: تطبيقات، مواقع، أنظمة وذكاء اصطناعي." };
 
 // Runs before paint so the page never flashes LTR / light.

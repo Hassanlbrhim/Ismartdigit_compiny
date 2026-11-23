@@ -2,21 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{--bg:#fff;--card:#fff;--heading:#122d46;--title:#1f2937;--sub:#6b7280;--mint:#f0fdfa;--band:#f3f4f6;--line:rgba(0,0,0,.05);--field:#f8fafc;--fieldline:#e2e8f0}
+:root{--bg:#fff;--card:#fff;--heading:#122d46;--title:#1f2937;--sub:#6b7280;--mint:#f0fdfa;--band:#f3f4f6;--line:rgba(0,0,0,.05);--field:#f8fafc;--fieldline:#e2e8f0;--gutter:1.25rem}
 .dark{--bg:#0a1827;--card:#0f2438;--heading:#fff;--title:#f1f5f9;--sub:#9db0c4;--mint:#0c2030;--band:#081420;--line:rgba(255,255,255,.08);--field:#0b1d2f;--fieldline:#23405a}
+@media (min-width:640px){:root{--gutter:2.5rem}}
+@media (min-width:1280px){:root{--gutter:5rem}}
 
 @layer base {
-  html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-  body{@apply bg-page font-sans text-title antialiased;overflow-x:clip}
-  img,svg,video{max-width:100%}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(4.5rem + env(safe-area-inset-top));-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  /* No sideways scroll. `clip` (where supported) does not create a scroll container, so sticky + transforms keep working. */
+  body{@apply bg-page font-sans text-title antialiased;overflow-x:hidden}
+  @supports (overflow:clip){body{overflow-x:clip}}
+  a,button,[role="button"],input,textarea,select{touch-action:manipulation}
+  a,button{-webkit-tap-highlight-color:transparent}
+  img,svg{max-width:100%}
   :focus-visible{@apply outline-2 outline-offset-2 outline-primary}
 }
 @layer components {
-  .wrap{@apply mx-auto w-full max-w-[1440px] px-5 sm:px-10 xl:px-20}
-  /* Section badge: tinted pill with a leading dot (matches "من نحن" / "خدماتنا" in Figma) */
+  /* Page gutter that also clears notches / rounded corners in landscape */
+  .wrap{@apply mx-auto w-full max-w-[1440px];padding-left:max(var(--gutter),env(safe-area-inset-left));padding-right:max(var(--gutter),env(safe-area-inset-right))}
   .badge{@apply inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/15 px-4 py-2 text-base font-bold leading-5 text-primary}
   .badge::before{content:"";@apply h-2 w-2 rounded-full bg-primary}
-  .h2{@apply text-[30px] font-black leading-[42px] text-title md:text-[44px] md:leading-[55px]}
-  .input{@apply w-full rounded-[10px] border border-fieldline bg-field px-[14px] py-3 text-base text-title md:text-[15px] placeholder:text-black/50 dark:placeholder:text-white/40 focus:border-primary focus:outline-none}
+  .h2{@apply text-fluid-h2 font-black text-title}
+  /* 16px on phones stops iOS/Chrome auto-zoom on focus */
+  .input{@apply w-full rounded-[10px] border border-fieldline bg-field px-[14px] py-3 text-base text-title placeholder:text-black/50 dark:placeholder:text-white/40 focus:border-primary focus:outline-none sm:text-[15px]}
 }
-@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

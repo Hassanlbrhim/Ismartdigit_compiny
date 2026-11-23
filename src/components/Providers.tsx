@@ -1,6 +1,7 @@
 "use client";
 // Two contexts: App (language, theme, UI strings) and Content (editable site data + save).
 import { createContext, useCallback, useContext, useEffect, useState, ReactNode } from "react";
+import { MotionConfig } from "framer-motion";
 import type { Content, L, Lang } from "@/lib/types";
 import { ui as UI, Dict } from "@/lib/i18n";
 
@@ -34,7 +35,7 @@ export function Providers({ children, initial }: { children: ReactNode; initial:
 
   return (
     <AppCtx.Provider value={{ lang, setLang, dark, toggleDark: () => setDark(v => !v), ui: UI[lang], tx: l => l[lang] || l.ar }}>
-      <CntCtx.Provider value={{ content, saveContent }}>{children}</CntCtx.Provider>
+      <CntCtx.Provider value={{ content, saveContent }}><MotionConfig reducedMotion="user">{children}</MotionConfig></CntCtx.Provider>
     </AppCtx.Provider>
   );
 }

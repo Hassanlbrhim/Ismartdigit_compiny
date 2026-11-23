@@ -50,10 +50,10 @@ export default function Projects() {
                 <div className="h-16 w-24 shrink-0 overflow-hidden rounded-lg bg-[#a3a3a3]">{p.image && <img src={p.image} alt="" className="h-full w-full object-cover" />}</div>
                 <div className="min-w-[160px] flex-1"><p className="font-bold">{p.title.ar || "(بدون عنوان)"}</p><p className="text-sm text-sub" dir="ltr">{p.tags.join(" · ")}</p></div>
                 <div className="flex items-center gap-2 text-sm"><Toggle checked={p.published} onChange={v => commit(list.map(x => x.id === p.id ? { ...x, published: v } : x), v ? "تم النشر" : "تم الإخفاء")} label="نشر" />{p.published ? "منشور" : "مخفي"}</div>
-                <div className="flex gap-1">
+                <div className="flex w-full gap-1 sm:w-auto">
                   <Btn variant="ghost" className="!px-2.5" aria-label="أعلى" disabled={i === 0} onClick={() => move(i, -1)}><ArrowUp size={16} /></Btn>
                   <Btn variant="ghost" className="!px-2.5" aria-label="أسفل" disabled={i === list.length - 1} onClick={() => move(i, 1)}><ArrowDown size={16} /></Btn>
-                  <Btn variant="ghost" onClick={() => setEdit(p)}><Pencil size={16} />تعديل</Btn>
+                  <Btn variant="ghost" className="flex-1 sm:flex-none" onClick={() => setEdit(p)}><Pencil size={16} />تعديل</Btn>
                   <Btn variant="danger" aria-label="حذف" onClick={() => confirm(`حذف «${p.title.ar}»؟`) && commit(list.filter(x => x.id !== p.id), "تم الحذف")}><Trash2 size={16} /></Btn>
                 </div>
               </li>
